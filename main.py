@@ -64,5 +64,4 @@ leci = symulacja(szybowiec, 100)
 @interact(n=(0, 100))
 def animuj(n=0):
     plt.matshow(leci[n])
-    plt.draw()
 
