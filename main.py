@@ -1,5 +1,7 @@
 import numpy as np
 from copy import deepcopy
+import matplotlib.pyplot as plt
+from ipywidgets import interact
 
 
 def nowa_plansza(H, W, pola=None):
@@ -10,13 +12,11 @@ def nowa_plansza(H, W, pola=None):
             for pair in pola:
                 if pair[0] < H and pair[1] < W:
                     plansza[pair[0], pair[1]] = 1
-                else:
-                    print('blad')
-                    return None
-            return plansza
         else:
             print('blad')
             return None
+
+        return plansza
 
 
 def sasiedzi(plansza, i, j):
@@ -57,8 +57,12 @@ def symulacja(plansza, n=100):
     return lista
 
 
-arr = [(0, 0), (1, 1), (0, 1)]
-game_arr = nowa_plansza(6, 6, arr)
-sym_arr = symulacja(game_arr, 2)
+szybowiec = nowa_plansza(50, 50, [(25, 30), (25, 31), (25, 32), (26, 30), (27, 31)])
+leci = symulacja(szybowiec, 100)
 
-print(sym_arr.__str__())
+
+@interact(n=(0, 100))
+def animuj(n=0):
+    plt.matshow(leci[n])
+    plt.draw()
+
